@@ -10,9 +10,9 @@
         MinWidth="320"
         MinHeight="500"
         Background="#FF2D2D40">
-    
+
     <Grid>
-        
+        <!-- Resources -->
         <Grid.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
@@ -20,18 +20,20 @@
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
         </Grid.Resources>
-        
+
+        <!-- Grid Definitions -->
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" /> <!-- Основная часть калькулятора -->
             <ColumnDefinition Width="Auto" /> <!-- Боковое меню с историей -->
         </Grid.ColumnDefinitions>
-        
+
         <!-- Меню -->
         <Menu Grid.Row="0" Background="Azure" Grid.ColumnSpan="2">
             <MenuItem Header="_File">
@@ -41,39 +43,64 @@
             </MenuItem>
         </Menu>
 
-        <!-- Текстовое поле для ввода/отображения -->
-        <TextBlock Grid.Row="1" Grid.Column="0" FontSize="48" TextAlignment="Right" VerticalAlignment="Center" 
-                   Background="#FF2D2D40" Foreground="White"
-                   Name="DisplayBox" Text="{Binding Display, UpdateSourceTrigger=PropertyChanged}" />
+        <!-- Поле для полного выражения -->
+        <TextBlock Grid.Row="1" Grid.Column="0" 
+                   Name="FullExpressionBox" 
+                   Text="{Binding FullExpression, UpdateSourceTrigger=PropertyChanged}" 
+                   Background="#FF2D2D40" 
+                   Foreground="LightGray" 
+                   FontSize="18" 
+                   FontStyle="Italic" 
+                   Padding="10"
+                   Margin="10 10 10 0" 
+                   TextAlignment="Right"
+                   TextWrapping="Wrap"
+                   VerticalAlignment="Bottom" 
+                   Opacity="0.8"/>
 
+        <!-- Основное поле для отображения результата -->
+        <TextBlock Grid.Row="2" Grid.Column="0" 
+                   FontSize="48" 
+                   TextAlignment="Right" 
+                   VerticalAlignment="Center" 
+                   Background="#FF2D2D40" 
+                   Foreground="White"
+                   Name="DisplayBox" 
+                   Text="{Binding Display, UpdateSourceTrigger=PropertyChanged}" 
+                   Padding="10" 
+                   Margin="10 0 10 10" />
 
         <!-- Кнопки калькулятора -->
-        <UniformGrid Grid.Row="2" Grid.Column="0" Columns="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <Button Command="{Binding DigitBtnClickCommand}" Content="7" Style="{StaticResource CalcButtonStyle}" />
-            <Button Command="{Binding DigitBtnClickCommand}" Content="8" Style="{StaticResource CalcButtonStyle}" />
-            <Button Command="{Binding DigitBtnClickCommand}" Content="9" Style="{StaticResource CalcButtonStyle}" />
-            <Button Command="{Binding OperatorBtnClickCommand}" Content="/" Style="{StaticResource CalcButtonStyle}" />
+        <UniformGrid Grid.Row="3" Grid.Column="0" 
+                     Columns="4" 
+                     HorizontalAlignment="Stretch" 
+                     VerticalAlignment="Stretch"
+                     Margin="10">
+            <Button Command="{Binding DigitBtnClickCommand}" CommandParameter="7" Content="7" Style="{StaticResource CalcButtonStyle}" />
+            <Button Command="{Binding DigitBtnClickCommand}" CommandParameter="8" Content="8" Style="{StaticResource CalcButtonStyle}" />
+            <Button Command="{Binding DigitBtnClickCommand}" CommandParameter="9" Content="9" Style="{StaticResource CalcButtonStyle}" />
+            <Button Command="{Binding OperatorBtnClickCommand}" CommandParameter="/" Content="/" Style="{StaticResource CalcButtonStyle}" />
             
-            <Button Command="{Binding DigitBtnClickCommand}" Content="4" Style="{StaticResource CalcButtonStyle}" />
-            <Button Command="{Binding DigitBtnClickCommand}" Content="5" Style="{StaticResource CalcButtonStyle}" />
-            <Button Command="{Binding DigitBtnClickCommand}" Content="6" Style="{StaticResource CalcButtonStyle}" />
-            <Button Command="{Binding OperatorBtnClickCommand}" Content="*" Style="{StaticResource CalcButtonStyle}" />
+            <Button Command="{Binding DigitBtnClickCommand}" CommandParameter="4" Content="4" Style="{StaticResource CalcButtonStyle}" />
+            <Button Command="{Binding DigitBtnClickCommand}" CommandParameter="5" Content="5" Style="{StaticResource CalcButtonStyle}" />
+            <Button Command="{Binding DigitBtnClickCommand}" CommandParameter="6" Content="6" Style="{StaticResource CalcButtonStyle}" />
+            <Button Command="{Binding OperatorBtnClickCommand}" CommandParameter="*" Content="*" Style="{StaticResource CalcButtonStyle}" />
             
-            <Button Command="{Binding DigitBtnClickCommand}" Content="1" Style="{StaticResource CalcButtonStyle}" />
-            <Button Command="{Binding DigitBtnClickCommand}" Content="2" Style="{StaticResource CalcButtonStyle}" />
-            <Button Command="{Binding DigitBtnClickCommand}" Content="3" Style="{StaticResource CalcButtonStyle}" />
-            <Button Command="{Binding OperatorBtnClickCommand}" Content="-" Style="{StaticResource CalcButtonStyle}" />
+            <Button Command="{Binding DigitBtnClickCommand}" CommandParameter="1" Content="1" Style="{StaticResource CalcButtonStyle}" />
+            <Button Command="{Binding DigitBtnClickCommand}" CommandParameter="2" Content="2" Style="{StaticResource CalcButtonStyle}" />
+            <Button Command="{Binding DigitBtnClickCommand}" CommandParameter="3" Content="3" Style="{StaticResource CalcButtonStyle}" />
+            <Button Command="{Binding OperatorBtnClickCommand}" CommandParameter="-" Content="-" Style="{StaticResource CalcButtonStyle}" />
             
-            <Button Command="{Binding DigitBtnClickCommand}" Content="0" Style="{StaticResource CalcButtonStyle}" />
+            <Button Command="{Binding DigitBtnClickCommand}" CommandParameter="0" Content="0" Style="{StaticResource CalcButtonStyle}" />
             <Button Content="C" Style="{StaticResource CalcButtonStyle}" />
-            <Button Command="{Binding OperatorBtnClickCommand}" Content="=" Style="{StaticResource CalcButtonStyle}" />
-            <Button Command="{Binding OperatorBtnClickCommand}" Content="+" Style="{StaticResource CalcButtonStyle}" />
+            <Button Command="{Binding OperatorBtnClickCommand}" CommandParameter="=" Content="=" Style="{StaticResource CalcButtonStyle}" />
+            <Button Command="{Binding OperatorBtnClickCommand}" CommandParameter="+" Content="+" Style="{StaticResource CalcButtonStyle}" />
         </UniformGrid>
 
         <!-- Боковое меню с историей -->
-        <StackPanel Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" 
+        <StackPanel Grid.Row="1" Grid.RowSpan="3" Grid.Column="1" 
                     Background="DarkSlateBlue" 
-                    Width="200px"
+                    Width="200"
                     Visibility="{Binding IsHistoryVisible}">
             <TextBlock Text="History" 
                        HorizontalAlignment="Center" 
@@ -81,7 +108,5 @@
                        Foreground="Thistle" 
                        Margin="10"/>
         </StackPanel>
-
-        
     </Grid>
 </Window>
