@@ -42,9 +42,9 @@
         </Menu>
 
         <!-- Текстовое поле для ввода/отображения -->
-        <TextBox Grid.Row="1" Grid.Column="0" FontSize="48" TextAlignment="Right" VerticalAlignment="Center" 
-                 Background="#FF2D2D40" Foreground="White" BorderThickness="0" IsReadOnly="True" Name="DisplayBox"
-                 Text="{Binding FullExpression, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBlock Grid.Row="1" Grid.Column="0" FontSize="48" TextAlignment="Right" VerticalAlignment="Center" 
+                 Background="#FF2D2D40" Foreground="White"
+                 Name="DisplayBox" Text="{Binding Display, UpdateSourceTrigger=PropertyChanged}" />
 
         <!-- Кнопки калькулятора -->
         <UniformGrid Grid.Row="2" Grid.Column="0" Columns="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

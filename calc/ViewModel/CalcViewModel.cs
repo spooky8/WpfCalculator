@@ -84,7 +84,7 @@ namespace calc.ViewModel
             _fullExpression = string.Empty;
             DigitBtnClickCommand = new DigitButtonClickCommand(this);
             //ResetCommand = new ResetCommand(this);
-            //OperatorBtnClickCommand = new OperatorBtnClickCommand(this);
+            OperatorBtnClickCommand = new OperatorButtonClickCommand(this);
             //ChangeMinusBtnClickCommand = new ChangeMinusBtnClickCommand();
             //RemoveLastSymbolBtnClickCommand = new RemoveLastSymbolBtnClickCommand(this);
             //DegreeUpBtnClickCommand = new DegreeUpBtnClickCommand(this);
