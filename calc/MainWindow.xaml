@@ -1,0 +1,86 @@
+﻿<Window x:Class="WpfCalculator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Calculator" Height="600" Width="800"
+        Top="5"
+        Left="5"
+        MinWidth="320"
+        MinHeight="500"
+        Background="#FF2D2D40">
+    
+    <Grid>
+        
+        <Grid.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="Dictionary1.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </Grid.Resources>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" /> <!-- Основная часть калькулятора -->
+            <ColumnDefinition Width="Auto" /> <!-- Боковое меню с историей -->
+        </Grid.ColumnDefinitions>
+        
+        <!-- Меню -->
+        <Menu Grid.Row="0" Background="Azure" Grid.ColumnSpan="2">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Open" />
+                <Separator/>
+                <MenuItem Header="_Exit" />
+            </MenuItem>
+        </Menu>
+
+        <!-- Текстовое поле для ввода/отображения -->
+        <TextBox Grid.Row="1" Grid.Column="0" FontSize="48" TextAlignment="Right" VerticalAlignment="Center" 
+                 Background="#FF2D2D40" Foreground="White" BorderThickness="0" IsReadOnly="True" Name="DisplayBox"
+                 Text="{Binding FullExpression, UpdateSourceTrigger=PropertyChanged}" />
+
+        <!-- Кнопки калькулятора -->
+        <UniformGrid Grid.Row="2" Grid.Column="0" Columns="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Button Command="{Binding DigitBtnClickCommand}" Content="7" Style="{StaticResource CalcButtonStyle}" />
+            <Button Command="{Binding DigitBtnClickCommand}" Content="8" Style="{StaticResource CalcButtonStyle}" />
+            <Button Command="{Binding DigitBtnClickCommand}" Content="9" Style="{StaticResource CalcButtonStyle}" />
+            <Button Command="{Binding OperatorBtnClickCommand}" Content="/" Style="{StaticResource CalcButtonStyle}" />
+            
+            <Button Command="{Binding DigitBtnClickCommand}" Content="4" Style="{StaticResource CalcButtonStyle}" />
+            <Button Command="{Binding DigitBtnClickCommand}" Content="5" Style="{StaticResource CalcButtonStyle}" />
+            <Button Command="{Binding DigitBtnClickCommand}" Content="6" Style="{StaticResource CalcButtonStyle}" />
+            <Button Command="{Binding OperatorBtnClickCommand}" Content="*" Style="{StaticResource CalcButtonStyle}" />
+            
+            <Button Command="{Binding DigitBtnClickCommand}" Content="1" Style="{StaticResource CalcButtonStyle}" />
+            <Button Command="{Binding DigitBtnClickCommand}" Content="2" Style="{StaticResource CalcButtonStyle}" />
+            <Button Command="{Binding DigitBtnClickCommand}" Content="3" Style="{StaticResource CalcButtonStyle}" />
+            <Button Command="{Binding OperatorBtnClickCommand}" Content="-" Style="{StaticResource CalcButtonStyle}" />
+            
+            <Button Command="{Binding DigitBtnClickCommand}" Content="0" Style="{StaticResource CalcButtonStyle}" />
+            <Button Content="C" Style="{StaticResource CalcButtonStyle}" />
+            <Button Command="{Binding OperatorBtnClickCommand}" Content="=" Style="{StaticResource CalcButtonStyle}" />
+            <Button Command="{Binding OperatorBtnClickCommand}" Content="+" Style="{StaticResource CalcButtonStyle}" />
+        </UniformGrid>
+
+        <!-- Боковое меню с историей -->
+        <StackPanel Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" 
+                    Background="DarkSlateBlue" 
+                    Width="200px"
+                    Visibility="{Binding IsHistoryVisible}">
+            <TextBlock Text="History" 
+                       HorizontalAlignment="Center" 
+                       FontSize="16" 
+                       Foreground="Thistle" 
+                       Margin="10"/>
+        </StackPanel>
+
+        
+    </Grid>
+</Window>
