@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace calc.ViewModel
 {
-    public class CalcViewModel : Notifier
+    public class CalcViewModel : Notifier   
     {
         private readonly CalcModel _calculation;
         public CalcModel Calculation => _calculation;
